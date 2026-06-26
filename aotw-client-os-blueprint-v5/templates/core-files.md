@@ -1,8 +1,8 @@
 ---
 title: Core File Templates
 purpose: repo-file-templates
-version: 4.0
-updated: 2026-06-19
+version: 5.0
+updated: 2026-06-26
 ---
 
 # Core File Templates
@@ -682,28 +682,55 @@ updated: YYYY-MM-DD
 
 ## Session Template
 
+Write session notes with `_skills/session-note.md`, which is the source of truth for this format. Capture enough context to reconstruct the session months later without the transcript. Keep specifics; cut filler.
+
 ```markdown
 ---
 date: YYYY-MM-DD
-duration: approximate
-attendees: []
-topics: []
-source: attached-source
+duration: approximate (e.g., "~90 min")
+type: discovery | session | strategy | troubleshooting | check-in
+attendees: [Name 1, Name 2]
+topics: [specific-topic-1, specific-topic-2]
+source: filename or description of the raw source
 ---
 
-# Session: YYYY-MM-DD
+# Session Note - [Client] - YYYY-MM-DD
 
 ## Summary
 
+A real paragraph (5-8 sentences). What happened, what mattered, what changed, where things stand.
+
+## Context Going In
+
+What was happening before this call and what carried over from last time.
+
 ## Key Discussion Points
+
+### [Topic 1]
+
+What was discussed, tried, what worked or failed, and what the client said (short quotes). Enough detail to reconstruct it later.
+
+### [Topic 2]
 
 ## Decisions Made
 
+- Decision (also add to decisions-log.md)
+
 ## Action Items
+
+- **Owner**: description (context or due date)
 
 ## Open Questions
 
+## Client Language To Preserve
+
+Notable quotes and phrasing.
+
 ## Mood And Dynamics
 
-## Quotes Worth Preserving
+2-4 sentences on energy, frustration, enthusiasm, confidence, trust. For tone calibration.
+
+## Carry Into Next Session
+
+What to revisit, likely next focus, and the tiny practice step agreed.
 ```

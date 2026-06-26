@@ -1,11 +1,11 @@
 ---
-title: AOTW Client OS Blueprint v4
+title: AOTW Client OS Blueprint v5
 purpose: package-readme
-version: 4.0
-updated: 2026-06-19
+version: 5.0
+updated: 2026-06-26
 ---
 
-# AOTW Client OS Blueprint v4
+# AOTW Client OS Blueprint v5
 
 This package is the reusable blueprint for building a new Ahead of the Wave AI client operating repository from zero.
 
@@ -32,9 +32,9 @@ Give the AI agent:
 
 Do not require a repo `_inbox/` folder. Source material should be attached directly to the AI agent.
 
-## Important v4 Rule
+## Important v5 Rule
 
-This package includes 17 full skill bodies.
+This package includes 18 full skill bodies.
 
 Do not let the AI agent invent new skill instructions when building a client repo. It should copy or adapt the complete skill files in this package, changing only client-specific names, paths, and evidence.
 
@@ -44,7 +44,8 @@ When source material is attached, the new client repo should start from:
 
 1. `_skills/operating-router.md`
 2. `_skills/process-source-material.md`
-3. follow-on skills chosen by the router
+3. `_skills/session-note.md` for any discovery call, session, or meeting
+4. follow-on skills chosen by the router
 
 When preparing a session:
 
