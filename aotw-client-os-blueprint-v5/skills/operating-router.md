@@ -1,6 +1,6 @@
 ---
 purpose: default-entry-skill-and-skill-router
-updated: 2026-06-19
+updated: 2026-06-26
 trigger: Run first for any unclear request, attached transcript, new source material, prep request, repo update request, or general "what should we do next" request.
 ---
 
@@ -94,25 +94,27 @@ Examples:
 Run:
 
 1. `process-source-material.md`
-2. `action-registry-maintainer.md` if commitments, asks, blockers, or next steps are present
-3. `outcome-scorecard.md` if behavior change, adoption, value evidence, or success signals are present
-4. `tool-stack-governor.md` if tools, platforms, automations, integrations, or access issues are mentioned
-5. `client-practice-plan.md` if the client needs a tiny next practice step
-6. `privacy-boundary-check.md` if sensitive data, sharing, recording, public examples, or third-party tools are involved
-7. `session-retrospective.md` if the material reflects a client session
-8. `service-ip-extractor.md` if reusable AOTW method patterns appear
+2. `session-note.md` if the material is a discovery call, session, or meeting
+3. `action-registry-maintainer.md` if commitments, asks, blockers, or next steps are present
+4. `outcome-scorecard.md` if behavior change, adoption, value evidence, or success signals are present
+5. `tool-stack-governor.md` if tools, platforms, automations, integrations, or access issues are mentioned
+6. `client-practice-plan.md` if the client needs a tiny next practice step
+7. `privacy-boundary-check.md` if sensitive data, sharing, recording, public examples, or third-party tools are involved
+8. `session-retrospective.md` if the material reflects a client session
+9. `service-ip-extractor.md` if reusable AOTW method patterns appear
 
 ### Discovery Call
 
 Run:
 
 1. `process-source-material.md`
-2. `client-style-profile-builder.md`
-3. `action-registry-maintainer.md`
-4. `tool-stack-governor.md`
-5. `outcome-scorecard.md`
-6. `client-practice-plan.md`
-7. `service-ip-extractor.md`
+2. `session-note.md`
+3. `client-style-profile-builder.md`
+4. `action-registry-maintainer.md`
+5. `tool-stack-governor.md`
+6. `outcome-scorecard.md`
+7. `client-practice-plan.md`
+8. `service-ip-extractor.md`
 
 Create an initial session file and initial context/status records.
 
@@ -215,6 +217,7 @@ Run:
 Use these rules when more than one skill might apply:
 
 - Run `process-source-material.md` before any skill that depends on newly attached transcript or notes.
+- Run `session-note.md` whenever a discovery call, session, or meeting is processed, to capture durable session context with enough depth to reconstruct it later.
 - Run `privacy-boundary-check.md` before producing client-facing, shareable, public, or third-party-upload material.
 - Run `action-registry-maintainer.md` whenever there are promises, owners, blockers, or next steps.
 - Run `tool-stack-governor.md` whenever tools are introduced, recommended, blocked, retired, or causing overload.

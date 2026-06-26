@@ -1,13 +1,13 @@
 ---
 title: Research Principles for AOTW Client OS Repos
 purpose: research-backed-design-notes
-version: 4.0
-updated: 2026-06-19
+version: 5.0
+updated: 2026-06-26
 ---
 
 # Research Principles
 
-This note records the design principles behind the v4 blueprint.
+This note records the design principles behind the v5 blueprint.
 
 It is not client-facing. It helps the AOTW team and AI agents understand why the package is structured the way it is.
 
@@ -112,7 +112,15 @@ AOTW one-on-one sessions default to 90 minutes.
 
 Call prep should not silently produce a 30-minute agenda unless Calendar or engagement terms prove the session is shorter.
 
-### 9. Make Output Verifiable
+### 9. Capture Sessions With Enough Durable Context
+
+A one or two line session summary loses the context that makes the next session good.
+
+The repo is the long-term memory of the engagement. A session note should let a future AI agent or a different consultant reconstruct what happened, what was decided, what the client said, and how the client felt, without the transcript.
+
+The tension is real: keep enough context to rebuild the session, but do not bloat the repo. The rule is to keep specifics (what was tried, real client quotes, why a choice was made, mood) and cut filler (greetings, small talk, transcript noise). This is why v5 promotes session capture to its own skill, `session-note.md`.
+
+### 10. Make Output Verifiable
 
 Each skill should say:
 

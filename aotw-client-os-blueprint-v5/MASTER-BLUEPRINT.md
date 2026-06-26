@@ -2,13 +2,13 @@
 title: AOTW Client OS Master Blueprint
 purpose: reusable-build-instruction
 audience: Ahead of the Wave AI team and AI coding agents
-version: 4.0
-updated: 2026-06-19
+version: 5.0
+updated: 2026-06-26
 ---
 
 # AOTW Client OS Master Blueprint
 
-## Use This File With The v4 Package
+## Use This File With The v5 Package
 
 This master blueprint must be used together with:
 
@@ -113,6 +113,7 @@ The generated repo must include these complete skills:
 ```text
 _skills/operating-router.md
 _skills/process-source-material.md
+_skills/session-note.md
 _skills/call-prep.md
 _skills/follow-up-email.md
 _skills/action-registry-maintainer.md
@@ -237,6 +238,7 @@ Also verify:
 - all required skills exist with full bodies.
 - no `_inbox/` folder is required.
 - attached transcripts are routed through `process-source-material.md`.
+- `_skills/session-note.md` exists and session notes preserve enough context to reconstruct the call without the transcript.
 - Calendar is checked before Gmail when available.
 - call prep defaults to 90 minutes unless proven otherwise.
 

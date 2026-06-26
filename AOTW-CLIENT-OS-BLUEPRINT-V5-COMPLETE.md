@@ -1,23 +1,22 @@
-# AOTW Client OS Blueprint v4 - Complete Single-File Edition
+# AOTW Client OS Blueprint v5 - Complete Single-File Edition
 
-This single Markdown file contains the full reusable blueprint package, including the master build instruction, research principles, core file templates, and every complete skill body. It is generated from `outputs/aotw-client-os-blueprint-v4/`.
+This single Markdown file contains the full reusable blueprint package, including the master build instruction, research principles, core file templates, and every complete skill body. It is generated from `outputs/aotw-client-os-blueprint-v5/`.
 
 Use this file when you want to attach one complete instruction file to Codex, Claude Code, or another AI coding agent. If using the folder package instead, preserve the same file structure.
 
-
 ---
 
-## Included File: `outputs/aotw-client-os-blueprint-v4/README.md`
+## Included File: `outputs/aotw-client-os-blueprint-v5/README.md`
 
 ````markdown
 ---
-title: AOTW Client OS Blueprint v4
+title: AOTW Client OS Blueprint v5
 purpose: package-readme
-version: 4.0
-updated: 2026-06-19
+version: 5.0
+updated: 2026-06-26
 ---
 
-# AOTW Client OS Blueprint v4
+# AOTW Client OS Blueprint v5
 
 This package is the reusable blueprint for building a new Ahead of the Wave AI client operating repository from zero.
 
@@ -44,9 +43,9 @@ Give the AI agent:
 
 Do not require a repo `_inbox/` folder. Source material should be attached directly to the AI agent.
 
-## Important v4 Rule
+## Important v5 Rule
 
-This package includes 17 full skill bodies.
+This package includes 18 full skill bodies.
 
 Do not let the AI agent invent new skill instructions when building a client repo. It should copy or adapt the complete skill files in this package, changing only client-specific names, paths, and evidence.
 
@@ -56,7 +55,8 @@ When source material is attached, the new client repo should start from:
 
 1. `_skills/operating-router.md`
 2. `_skills/process-source-material.md`
-3. follow-on skills chosen by the router
+3. `_skills/session-note.md` for any discovery call, session, or meeting
+4. follow-on skills chosen by the router
 
 When preparing a session:
 
@@ -78,23 +78,22 @@ This package should make the generated repo:
 - better at preserving client trust, context, and adoption evidence
 ````
 
-
 ---
 
-## Included File: `outputs/aotw-client-os-blueprint-v4/MASTER-BLUEPRINT.md`
+## Included File: `outputs/aotw-client-os-blueprint-v5/MASTER-BLUEPRINT.md`
 
 ````markdown
 ---
 title: AOTW Client OS Master Blueprint
 purpose: reusable-build-instruction
 audience: Ahead of the Wave AI team and AI coding agents
-version: 4.0
-updated: 2026-06-19
+version: 5.0
+updated: 2026-06-26
 ---
 
 # AOTW Client OS Master Blueprint
 
-## Use This File With The v4 Package
+## Use This File With The v5 Package
 
 This master blueprint must be used together with:
 
@@ -199,6 +198,7 @@ The generated repo must include these complete skills:
 ```text
 _skills/operating-router.md
 _skills/process-source-material.md
+_skills/session-note.md
 _skills/call-prep.md
 _skills/follow-up-email.md
 _skills/action-registry-maintainer.md
@@ -323,6 +323,7 @@ Also verify:
 - all required skills exist with full bodies.
 - no `_inbox/` folder is required.
 - attached transcripts are routed through `process-source-material.md`.
+- `_skills/session-note.md` exists and session notes preserve enough context to reconstruct the call without the transcript.
 - Calendar is checked before Gmail when available.
 - call prep defaults to 90 minutes unless proven otherwise.
 
@@ -371,22 +372,21 @@ After building the repo, report:
 Do not say the repo is complete forever. Say it is ready for the next consulting step.
 ````
 
-
 ---
 
-## Included File: `outputs/aotw-client-os-blueprint-v4/references/research-principles.md`
+## Included File: `outputs/aotw-client-os-blueprint-v5/references/research-principles.md`
 
 ````markdown
 ---
 title: Research Principles for AOTW Client OS Repos
 purpose: research-backed-design-notes
-version: 4.0
-updated: 2026-06-19
+version: 5.0
+updated: 2026-06-26
 ---
 
 # Research Principles
 
-This note records the design principles behind the v4 blueprint.
+This note records the design principles behind the v5 blueprint.
 
 It is not client-facing. It helps the AOTW team and AI agents understand why the package is structured the way it is.
 
@@ -491,7 +491,15 @@ AOTW one-on-one sessions default to 90 minutes.
 
 Call prep should not silently produce a 30-minute agenda unless Calendar or engagement terms prove the session is shorter.
 
-### 9. Make Output Verifiable
+### 9. Capture Sessions With Enough Durable Context
+
+A one or two line session summary loses the context that makes the next session good.
+
+The repo is the long-term memory of the engagement. A session note should let a future AI agent or a different consultant reconstruct what happened, what was decided, what the client said, and how the client felt, without the transcript.
+
+The tension is real: keep enough context to rebuild the session, but do not bloat the repo. The rule is to keep specifics (what was tried, real client quotes, why a choice was made, mood) and cut filler (greetings, small talk, transcript noise). This is why v5 promotes session capture to its own skill, `session-note.md`.
+
+### 10. Make Output Verifiable
 
 Each skill should say:
 
@@ -501,20 +509,18 @@ Each skill should say:
 - what needs attention
 
 This makes the system auditable and easier to improve.
-
 ````
-
 
 ---
 
-## Included File: `outputs/aotw-client-os-blueprint-v4/templates/core-files.md`
+## Included File: `outputs/aotw-client-os-blueprint-v5/templates/core-files.md`
 
 ````markdown
 ---
 title: Core File Templates
 purpose: repo-file-templates
-version: 4.0
-updated: 2026-06-19
+version: 5.0
+updated: 2026-06-26
 ---
 
 # Core File Templates
@@ -1194,42 +1200,68 @@ updated: YYYY-MM-DD
 
 ## Session Template
 
+Write session notes with `_skills/session-note.md`, which is the source of truth for this format. Capture enough context to reconstruct the session months later without the transcript. Keep specifics; cut filler.
+
 ```markdown
 ---
 date: YYYY-MM-DD
-duration: approximate
-attendees: []
-topics: []
-source: attached-source
+duration: approximate (e.g., "~90 min")
+type: discovery | session | strategy | troubleshooting | check-in
+attendees: [Name 1, Name 2]
+topics: [specific-topic-1, specific-topic-2]
+source: filename or description of the raw source
 ---
 
-# Session: YYYY-MM-DD
+# Session Note - [Client] - YYYY-MM-DD
 
 ## Summary
 
+A real paragraph (5-8 sentences). What happened, what mattered, what changed, where things stand.
+
+## Context Going In
+
+What was happening before this call and what carried over from last time.
+
 ## Key Discussion Points
+
+### [Topic 1]
+
+What was discussed, tried, what worked or failed, and what the client said (short quotes). Enough detail to reconstruct it later.
+
+### [Topic 2]
 
 ## Decisions Made
 
+- Decision (also add to decisions-log.md)
+
 ## Action Items
+
+- **Owner**: description (context or due date)
 
 ## Open Questions
 
+## Client Language To Preserve
+
+Notable quotes and phrasing.
+
 ## Mood And Dynamics
 
-## Quotes Worth Preserving
+2-4 sentences on energy, frustration, enthusiasm, confidence, trust. For tone calibration.
+
+## Carry Into Next Session
+
+What to revisit, likely next focus, and the tiny practice step agreed.
 ```
 ````
 
-
 ---
 
-## Included File: `outputs/aotw-client-os-blueprint-v4/skills/operating-router.md`
+## Included File: `outputs/aotw-client-os-blueprint-v5/skills/operating-router.md`
 
 ````markdown
 ---
 purpose: default-entry-skill-and-skill-router
-updated: 2026-06-19
+updated: 2026-06-26
 trigger: Run first for any unclear request, attached transcript, new source material, prep request, repo update request, or general "what should we do next" request.
 ---
 
@@ -1323,25 +1355,27 @@ Examples:
 Run:
 
 1. `process-source-material.md`
-2. `action-registry-maintainer.md` if commitments, asks, blockers, or next steps are present
-3. `outcome-scorecard.md` if behavior change, adoption, value evidence, or success signals are present
-4. `tool-stack-governor.md` if tools, platforms, automations, integrations, or access issues are mentioned
-5. `client-practice-plan.md` if the client needs a tiny next practice step
-6. `privacy-boundary-check.md` if sensitive data, sharing, recording, public examples, or third-party tools are involved
-7. `session-retrospective.md` if the material reflects a client session
-8. `service-ip-extractor.md` if reusable AOTW method patterns appear
+2. `session-note.md` if the material is a discovery call, session, or meeting
+3. `action-registry-maintainer.md` if commitments, asks, blockers, or next steps are present
+4. `outcome-scorecard.md` if behavior change, adoption, value evidence, or success signals are present
+5. `tool-stack-governor.md` if tools, platforms, automations, integrations, or access issues are mentioned
+6. `client-practice-plan.md` if the client needs a tiny next practice step
+7. `privacy-boundary-check.md` if sensitive data, sharing, recording, public examples, or third-party tools are involved
+8. `session-retrospective.md` if the material reflects a client session
+9. `service-ip-extractor.md` if reusable AOTW method patterns appear
 
 ### Discovery Call
 
 Run:
 
 1. `process-source-material.md`
-2. `client-style-profile-builder.md`
-3. `action-registry-maintainer.md`
-4. `tool-stack-governor.md`
-5. `outcome-scorecard.md`
-6. `client-practice-plan.md`
-7. `service-ip-extractor.md`
+2. `session-note.md`
+3. `client-style-profile-builder.md`
+4. `action-registry-maintainer.md`
+5. `tool-stack-governor.md`
+6. `outcome-scorecard.md`
+7. `client-practice-plan.md`
+8. `service-ip-extractor.md`
 
 Create an initial session file and initial context/status records.
 
@@ -1444,6 +1478,7 @@ Run:
 Use these rules when more than one skill might apply:
 
 - Run `process-source-material.md` before any skill that depends on newly attached transcript or notes.
+- Run `session-note.md` whenever a discovery call, session, or meeting is processed, to capture durable session context with enough depth to reconstruct it later.
 - Run `privacy-boundary-check.md` before producing client-facing, shareable, public, or third-party-upload material.
 - Run `action-registry-maintainer.md` whenever there are promises, owners, blockers, or next steps.
 - Run `tool-stack-governor.md` whenever tools are introduced, recommended, blocked, retired, or causing overload.
@@ -1503,18 +1538,16 @@ When done, report:
 - any connected tools checked
 - remaining uncertainty
 - the next useful consulting step
-
 ````
-
 
 ---
 
-## Included File: `outputs/aotw-client-os-blueprint-v4/skills/process-source-material.md`
+## Included File: `outputs/aotw-client-os-blueprint-v5/skills/process-source-material.md`
 
 ````markdown
 ---
 purpose: process-directly-attached-transcripts-notes-and-source-material
-updated: 2026-06-19
+updated: 2026-06-26
 trigger: Run when discovery calls, session transcripts, notes, email excerpts, documents, screenshots, or other source materials are attached directly to the AI agent.
 ---
 
@@ -1706,27 +1739,17 @@ Do not create workstreams for every possible automation.
 
 ### Sessions
 
-For discovery or session transcripts, create a session note:
+For discovery or session transcripts, create a session note with `session-note.md`.
+
+That skill defines the full session-note format and is the source of truth for it. Do not write a thin one-line summary here. Capture enough context that a future AI agent or consultant can reconstruct the session without the transcript, while keeping the repo from bloating.
+
+Create:
 
 ```text
-sessions/YYYY-MM-DD-[session-type].md
+sessions/YYYY-MM-DD-[type].md
 ```
 
-Include:
-
-- date
-- source type
-- participants if known
-- purpose
-- summary
-- important client language
-- decisions
-- commitments
-- blockers
-- emotional or relationship signals
-- suggested follow-on skills
-
-If the date is unknown, use `sessions/undated-[source-type]-[short-topic].md` and mark the date as unknown.
+If the date is unknown, use `sessions/undated-[type]-[short-topic].md` and mark the date as unknown.
 
 ### Tools
 
@@ -1875,13 +1898,208 @@ Do not:
 - turn every idea into an action
 - treat a demo as adoption
 - expose sensitive details in client-facing outputs
-
 ````
-
 
 ---
 
-## Included File: `outputs/aotw-client-os-blueprint-v4/skills/call-prep.md`
+## Included File: `outputs/aotw-client-os-blueprint-v5/skills/session-note.md`
+
+````markdown
+---
+purpose: capture-a-session-with-enough-durable-context
+updated: 2026-06-26
+trigger: Run when a discovery call, coaching session, meeting, or working call needs to be written into the repo as a session note.
+---
+
+# Session Note
+
+## Purpose
+
+Turn one call or meeting into a durable session note that preserves the real context of what happened.
+
+The note is the long-term memory of the engagement. Months later, an AI agent or a different consultant should be able to read it and understand exactly what happened, what was decided, what the client said, and how the client felt, without the transcript.
+
+This skill exists because thin, one-line session summaries lose the context that makes the next session good. Capture what matters. Do not bloat the repo.
+
+## The Core Tension
+
+Keep enough context to fully reconstruct the session. Cut everything that does not change a future decision, action, or tone.
+
+A good session note is usually one to three screens. Long enough to rebuild the session from memory. Short enough to read before the next call.
+
+When in doubt, keep specifics (what was tried, what the client said, why a choice was made) and drop filler (greetings, repeated small talk, transcript noise, generic AI commentary).
+
+## One File Per Call
+
+Create one note per call or meeting:
+
+```text
+sessions/YYYY-MM-DD-[type].md
+```
+
+`[type]` is one of: `discovery`, `session`, `strategy`, `troubleshooting`, `check-in`.
+
+If the date is unknown, use `sessions/undated-[type]-[short-topic].md` and mark the date as unknown.
+
+## Required Read Before Writing
+
+Read enough to place this session in context:
+
+1. `context/client-contact.md`
+2. `context/client-profile.md`
+3. the previous `sessions/` note
+4. `status/current-status.md`
+5. `status/action-registry.md`
+6. relevant active `workstreams/`
+
+## Frontmatter
+
+```yaml
+---
+date: YYYY-MM-DD
+duration: approximate (e.g., "~90 min")
+type: discovery | session | strategy | troubleshooting | check-in
+attendees: [Name 1, Name 2]
+topics: [specific-topic-1, specific-topic-2]
+source: filename or description of the raw source
+---
+```
+
+Use specific topic slugs, not vague ones. `gmail-filters-setup` is useful. `productivity` is not.
+
+## Body Structure
+
+```markdown
+# Session Note - [Client] - YYYY-MM-DD
+
+## Summary
+
+## Context Going In
+
+## Key Discussion Points
+
+### [Topic 1]
+### [Topic 2]
+
+## Decisions Made
+
+## Action Items
+
+## Open Questions
+
+## Client Language To Preserve
+
+## Mood And Dynamics
+
+## Carry Into Next Session
+```
+
+### Summary
+
+A real paragraph, roughly 5 to 8 sentences. Not one or two lines.
+
+Say what happened, what mattered, what changed, and where things stand now. Be specific and concrete, not abstract. Name the real workflows, tools, and moments.
+
+Someone who was not on the call should understand the session from this paragraph alone.
+
+### Context Going In
+
+2 to 4 sentences. What was happening before this call, what this session was meant to address, and what carried over from last time.
+
+This is what lets a future reader rebuild the thread, not just the single session.
+
+### Key Discussion Points
+
+This is the heart of the note. Use an `###` subsection per major topic.
+
+For each topic, capture the real detail:
+
+- what was discussed
+- what was tried
+- what worked
+- what failed or confused the client
+- what the client actually said, with short direct quotes
+- any technical specifics that matter (settings, names, steps, numbers)
+
+Write enough that an AI reading this months later understands exactly what happened, not just the headline.
+
+Use short quotes, not large transcript dumps.
+
+### Decisions Made
+
+A bullet list of actual decisions. Also add each to `status/decisions-log.md`.
+
+Log decisions, not brainstorming. A decision has commitment behind it ("we decided", "we will", "we will not").
+
+### Action Items
+
+Format each as:
+
+```text
+- **Owner**: description (context or due date if known)
+```
+
+Also push these into `status/action-registry.md` via `action-registry-maintainer.md`. The note records them; the registry tracks them.
+
+### Open Questions
+
+Unresolved items, blockers, or things to confirm before or during the next session.
+
+### Client Language To Preserve
+
+Notable phrases, vocabulary, metaphors, or quotes that show how the client thinks and talks.
+
+Send useful examples to `client-style-profile-builder.md` so the client's voice is preserved over time.
+
+### Mood And Dynamics
+
+2 to 4 sentences on client energy, frustration, enthusiasm, confidence, and trust.
+
+This is critical for AI tone calibration on the next session and follow-up. Be honest and specific. Do not blame the client.
+
+### Carry Into Next Session
+
+What to revisit, the likely next focus, and the tiny practice step the client agreed to. This feeds `call-prep.md` and `client-practice-plan.md`.
+
+## Follow-On Updates
+
+After the note, make sure the rest of the repo reflects it:
+
+- `status/current-status.md` - update active priorities, blockers, what changed
+- `status/decisions-log.md` - add decisions
+- `status/action-registry.md` - add or update commitments
+- `status/outcomes-scorecard.md` - add adoption or value evidence if present
+- relevant `workstreams/` - update progress and next steps
+
+Do not duplicate the full action list forever. The note is the record of the call; the status files are the live trackers. Cross-reference rather than copy everything twice.
+
+## Quality Check
+
+Before finishing, verify:
+
+- the summary is a real paragraph, not one line
+- a reader could reconstruct the session from the note alone
+- real client quotes and language are preserved
+- decisions and actions are captured and mirrored to their trackers
+- mood and dynamics are recorded for tone calibration
+- the note is detailed where it matters and not padded where it does not
+- evidence is separated from inference, and uncertainty is marked
+
+## Do Not Do
+
+Do not:
+
+- write a one or two line summary
+- paste large transcript sections
+- strip out the context that makes the next session good
+- pad the note with generic AI consulting language
+- invent precision the source does not support
+- bury sensitive details in a client-facing place (this note is internal)
+````
+
+---
+
+## Included File: `outputs/aotw-client-os-blueprint-v5/skills/call-prep.md`
 
 ````markdown
 ---
@@ -2210,10 +2428,9 @@ Do not:
 - make research claims without current verification when product behavior may have changed
 ````
 
-
 ---
 
-## Included File: `outputs/aotw-client-os-blueprint-v4/skills/follow-up-email.md`
+## Included File: `outputs/aotw-client-os-blueprint-v5/skills/follow-up-email.md`
 
 ````markdown
 ---
@@ -2343,13 +2560,11 @@ Before finalizing, verify:
 - the email does not make the client feel behind
 - the tone matches the client relationship
 - the next step is small and concrete
-
 ````
-
 
 ---
 
-## Included File: `outputs/aotw-client-os-blueprint-v4/skills/action-registry-maintainer.md`
+## Included File: `outputs/aotw-client-os-blueprint-v5/skills/action-registry-maintainer.md`
 
 ````markdown
 ---
@@ -2517,13 +2732,11 @@ Before finishing, verify:
 - client commitments are not framed as blame
 - old duplicates were merged
 - no action was invented from weak evidence
-
 ````
-
 
 ---
 
-## Included File: `outputs/aotw-client-os-blueprint-v4/skills/outcome-scorecard.md`
+## Included File: `outputs/aotw-client-os-blueprint-v5/skills/outcome-scorecard.md`
 
 ````markdown
 ---
@@ -2677,13 +2890,11 @@ Before finishing, verify:
 - confidence is clear
 - value is tied to client behavior or business reality
 - client-facing claims are supportable
-
 ````
-
 
 ---
 
-## Included File: `outputs/aotw-client-os-blueprint-v4/skills/client-practice-plan.md`
+## Included File: `outputs/aotw-client-os-blueprint-v5/skills/client-practice-plan.md`
 
 ````markdown
 ---
@@ -2801,13 +3012,11 @@ Before finishing, verify:
 - it can be done in a short time
 - it does not require sensitive data unless approved
 - it will create useful adoption evidence
-
 ````
-
 
 ---
 
-## Included File: `outputs/aotw-client-os-blueprint-v4/skills/tool-stack-governor.md`
+## Included File: `outputs/aotw-client-os-blueprint-v5/skills/tool-stack-governor.md`
 
 ````markdown
 ---
@@ -2939,13 +3148,11 @@ Before finishing, verify:
 - tool status reflects evidence
 - privacy concerns are visible
 - the stack is getting simpler where possible
-
 ````
-
 
 ---
 
-## Included File: `outputs/aotw-client-os-blueprint-v4/skills/privacy-boundary-check.md`
+## Included File: `outputs/aotw-client-os-blueprint-v5/skills/privacy-boundary-check.md`
 
 ````markdown
 ---
@@ -3094,13 +3301,11 @@ Before finishing, verify:
 - reusable service IP is anonymized
 - third-party upload is justified
 - uncertainty is visible
-
 ````
-
 
 ---
 
-## Included File: `outputs/aotw-client-os-blueprint-v4/skills/session-retrospective.md`
+## Included File: `outputs/aotw-client-os-blueprint-v5/skills/session-retrospective.md`
 
 ````markdown
 ---
@@ -3224,13 +3429,11 @@ Before finishing, verify:
 - it does not blame the client
 - it identifies one practical adjustment
 - reusable patterns are generalized before being added to playbooks
-
 ````
-
 
 ---
 
-## Included File: `outputs/aotw-client-os-blueprint-v4/skills/learning-bundle-builder.md`
+## Included File: `outputs/aotw-client-os-blueprint-v5/skills/learning-bundle-builder.md`
 
 ````markdown
 ---
@@ -3390,13 +3593,11 @@ Before finishing, verify:
 - the examples are safe
 - the practice is tiny
 - the asset matches current tool status
-
 ````
-
 
 ---
 
-## Included File: `outputs/aotw-client-os-blueprint-v4/skills/notebooklm-video-builder.md`
+## Included File: `outputs/aotw-client-os-blueprint-v5/skills/notebooklm-video-builder.md`
 
 ````markdown
 ---
@@ -3550,13 +3751,11 @@ Before finishing, verify:
 - the intended output is specific
 - private client context is removed
 - human review is required before upload if risk remains
-
 ````
-
 
 ---
 
-## Included File: `outputs/aotw-client-os-blueprint-v4/skills/technical-research-brief.md`
+## Included File: `outputs/aotw-client-os-blueprint-v5/skills/technical-research-brief.md`
 
 ````markdown
 ---
@@ -3709,13 +3908,11 @@ Before finishing, verify:
 - the recommendation is tied to the client’s actual workflow
 - privacy implications are not buried
 - next test is concrete
-
 ````
-
 
 ---
 
-## Included File: `outputs/aotw-client-os-blueprint-v4/skills/workstream-pruner.md`
+## Included File: `outputs/aotw-client-os-blueprint-v5/skills/workstream-pruner.md`
 
 ````markdown
 ---
@@ -3835,13 +4032,11 @@ Before finishing, verify:
 - parked workstreams preserve context without demanding attention
 - no client commitment was lost
 - status files reflect the pruning decision
-
 ````
-
 
 ---
 
-## Included File: `outputs/aotw-client-os-blueprint-v4/skills/client-style-profile-builder.md`
+## Included File: `outputs/aotw-client-os-blueprint-v5/skills/client-style-profile-builder.md`
 
 ````markdown
 ---
@@ -3959,13 +4154,11 @@ Before finishing, verify:
 - guidance is useful for writing
 - the profile does not stereotype the client
 - uncertainty is visible
-
 ````
-
 
 ---
 
-## Included File: `outputs/aotw-client-os-blueprint-v4/skills/monthly-progress-report.md`
+## Included File: `outputs/aotw-client-os-blueprint-v5/skills/monthly-progress-report.md`
 
 ````markdown
 ---
@@ -4099,13 +4292,11 @@ Before finishing, verify:
 - adoption is not overstated
 - next month focus is clear
 - the report is short enough to read
-
 ````
-
 
 ---
 
-## Included File: `outputs/aotw-client-os-blueprint-v4/skills/service-ip-extractor.md`
+## Included File: `outputs/aotw-client-os-blueprint-v5/skills/service-ip-extractor.md`
 
 ````markdown
 ---
@@ -4231,6 +4422,4 @@ Before finishing, verify:
 - risks are included
 - proof level is honest
 - the playbook remains practical
-
 ````
-

@@ -1,6 +1,6 @@
 ---
 purpose: process-directly-attached-transcripts-notes-and-source-material
-updated: 2026-06-19
+updated: 2026-06-26
 trigger: Run when discovery calls, session transcripts, notes, email excerpts, documents, screenshots, or other source materials are attached directly to the AI agent.
 ---
 
@@ -192,27 +192,17 @@ Do not create workstreams for every possible automation.
 
 ### Sessions
 
-For discovery or session transcripts, create a session note:
+For discovery or session transcripts, create a session note with `session-note.md`.
+
+That skill defines the full session-note format and is the source of truth for it. Do not write a thin one-line summary here. Capture enough context that a future AI agent or consultant can reconstruct the session without the transcript, while keeping the repo from bloating.
+
+Create:
 
 ```text
-sessions/YYYY-MM-DD-[session-type].md
+sessions/YYYY-MM-DD-[type].md
 ```
 
-Include:
-
-- date
-- source type
-- participants if known
-- purpose
-- summary
-- important client language
-- decisions
-- commitments
-- blockers
-- emotional or relationship signals
-- suggested follow-on skills
-
-If the date is unknown, use `sessions/undated-[source-type]-[short-topic].md` and mark the date as unknown.
+If the date is unknown, use `sessions/undated-[type]-[short-topic].md` and mark the date as unknown.
 
 ### Tools
 
