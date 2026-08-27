@@ -1,6 +1,6 @@
 ---
 purpose: interactive-mentor-supervisor-session-preparation
-version: 6.0
+version: 6.1
 trigger: Run when David asks to prepare for, think through, or get supervision for an upcoming client session.
 ---
 

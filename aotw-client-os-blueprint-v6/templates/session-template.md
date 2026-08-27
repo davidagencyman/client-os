@@ -1,6 +1,6 @@
 ---
 purpose: detailed-ai-optimized-session-record
-version: 6.0
+version: 6.1
 updated: 2026-08-27
 ---
 

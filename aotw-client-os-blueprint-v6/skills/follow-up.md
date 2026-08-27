@@ -1,6 +1,6 @@
 ---
 purpose: draft-human-client-follow-up-from-session
-version: 6.0
+version: 6.1
 trigger: Run after a session or when David explicitly asks for a follow-up message.
 ---
 
