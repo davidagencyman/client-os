@@ -50,7 +50,10 @@ configuration names Google Drive. Read metadata before content.
 
 1. Read the private source configuration in this repository. It must name the
    canonical root folder, folder ID/URL, folder structure, scan depth, supported
-   file types, identity keys, and date rule.
+   file types, identity keys, and date rule. Compare each candidate's stable
+   file ID and modified-time/revision fingerprint with the source registry
+   before fetching content; unchanged sources with a recorded terminal
+   decision can reuse that decision.
 2. List the configured root folder. For a Google Meet source, list its direct
    dated meeting subfolders, then list each subfolder’s files.
 3. Consider native Google Docs and configured text/markdown sources. Do not use
@@ -63,9 +66,11 @@ configuration names Google Drive. Read metadata before content.
 
 ## Step 2 — Verify client identity before processing
 
-Titles and folder names are candidate signals, not proof. Fetch the readable
-document text and verify the participant block or body against the canonical
-client identity and aliases in context/client.md.
+Titles and folder names are candidate signals, not proof. For a new, changed,
+or unresolved candidate, fetch the readable document text and verify the
+participant block or body against the canonical client identity and aliases in
+context/client.md. Do not refetch an unchanged source whose registry entry
+already records an accepted, rejected, or needs-review identity decision.
 
 - Accept only when the source clearly belongs to this client.
 - Mark ambiguous sources `needs-review` and do not process them.

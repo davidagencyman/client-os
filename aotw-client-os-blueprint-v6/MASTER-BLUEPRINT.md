@@ -214,11 +214,16 @@ Use the connected Google Drive plugin as the source of truth:
    state, and recent session frontmatter.
 2. List the configured root folder. For a Google Meet root, list its dated
    meeting subfolders and then list the files inside each candidate folder.
-3. Read metadata before fetching content. Consider native Google Docs and
-   supported text/markdown sources; do not download or store raw source files.
-4. Treat names, titles, and folder labels as candidate signals only. Fetch the
-   readable document text and verify the participant/client identity from the
-   body or participant block. A same-looking meeting title is not enough.
+3. Read metadata before fetching content. Compare the stable file ID and
+   modified-time/revision fingerprint with the source registry before fetching.
+   Reuse a prior terminal identity decision for an unchanged source; fetch
+   readable content only for new, changed, or unresolved candidates. Consider
+   native Google Docs and supported text/markdown sources; do not download or
+   store raw source files.
+4. Treat names, titles, and folder labels as candidate signals only. For a new
+   or changed candidate, fetch the readable document text and verify the
+   participant/client identity from the body or participant block. A
+   same-looking meeting title is not enough.
 5. If identity is clear, classify the source as accepted. If identity is
    ambiguous, record needs-review and do not process it. If it belongs to a
    different client, skip it without copying that client’s details into this
