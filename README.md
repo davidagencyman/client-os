@@ -1,39 +1,38 @@
-# Client OS
+---
+title: AOTW Client OS Blueprints
+purpose: package-entry-point
+updated: 2026-08-27
+---
 
-Reusable AOTW Client OS Blueprint v5 for creating AI-readable operating repositories for client engagements.
+# AOTW Client OS
 
-This repo is meant to be linked directly from Codex, Claude Code, or another capable AI coding agent when building a new client operating repo.
+This repository contains versioned blueprints for creating private,
+AI-readable operating repositories for Ahead of the Wave client engagements.
 
-## Use This Repo
+## Current default
 
-For most agents, point them at this repository and ask them to use:
+Use aotw-client-os-blueprint-v6/ for all new client repositories.
 
-- `aotw-client-os-blueprint-v5/MASTER-BLUEPRINT.md`
-- the full `aotw-client-os-blueprint-v5/skills/` folder
-- `aotw-client-os-blueprint-v5/templates/core-files.md`
-- `aotw-client-os-blueprint-v5/references/research-principles.md`
+v6 is built around detailed, AI-optimized session records as the durable
+replacement for retained raw transcripts. It also provides persistent,
+update-aware App Export and conversational session supervision.
 
-If an agent works better from one attachment, use:
+Start with:
 
-- `AOTW-CLIENT-OS-BLUEPRINT-V5-COMPLETE.md`
+1. aotw-client-os-blueprint-v6/MASTER-BLUEPRINT.md
+2. aotw-client-os-blueprint-v6/templates/
+3. aotw-client-os-blueprint-v6/skills/
+4. aotw-client-os-blueprint-v6/schemas/
 
-## What It Builds
+## Legacy package
 
-The blueprint creates a private client operating repository that stores context, sessions, action commitments, workstreams, decisions, adoption evidence, privacy boundaries, and session-preparation logic.
+aotw-client-os-blueprint-v5/ remains available for existing repositories that
+still use the v5 structure. Do not use it for new client repositories.
 
-Generated client repos should usually stay private because they may contain client-specific information.
+The standalone V5 complete file is retained for compatibility.
 
-## Package Contents
+## Repository boundary
 
-```text
-AOTW-CLIENT-OS-BLUEPRINT-V5-COMPLETE.md  Single-file edition
-aotw-client-os-blueprint-v5/README.md    Package instructions
-aotw-client-os-blueprint-v5/MASTER-BLUEPRINT.md
-aotw-client-os-blueprint-v5/skills/
-aotw-client-os-blueprint-v5/templates/
-aotw-client-os-blueprint-v5/references/
-```
-
-## License
-
-MIT. See `LICENSE`.
+This public package contains generic build instructions and sanitized
+templates. Client context, internal AOTW service IP, consultant retrospectives,
+and raw source material belong in private repositories.

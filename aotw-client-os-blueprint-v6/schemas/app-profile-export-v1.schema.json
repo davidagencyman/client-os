@@ -1,0 +1,554 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Client App Profile Export v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "clientId",
+    "displayName",
+    "generatedAt",
+    "source",
+    "home",
+    "activePractice",
+    "homework",
+    "aiGuide",
+    "progress",
+    "workstreams",
+    "toolStatus",
+    "privacy",
+    "nextSession"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": "client-profile-export/v1"
+    },
+    "clientId": {
+      "type": "string",
+      "minLength": 1
+    },
+    "displayName": {
+      "type": "string",
+      "minLength": 1
+    },
+    "generatedAt": {
+      "type": "string",
+      "minLength": 1
+    },
+    "source": {
+      "$ref": "#/$defs/source"
+    },
+    "home": {
+      "$ref": "#/$defs/home"
+    },
+    "activePractice": {
+      "$ref": "#/$defs/activePractice"
+    },
+    "homework": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/homeworkItem"
+      }
+    },
+    "aiGuide": {
+      "$ref": "#/$defs/aiGuide"
+    },
+    "progress": {
+      "$ref": "#/$defs/progress"
+    },
+    "workstreams": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/workstream"
+      }
+    },
+    "toolStatus": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/toolStatus"
+      }
+    },
+    "privacy": {
+      "$ref": "#/$defs/privacy"
+    },
+    "nextSession": {
+      "$ref": "#/$defs/nextSession"
+    }
+  },
+  "$defs": {
+    "source": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "repo"
+      ],
+      "properties": {
+        "repo": {
+          "type": "string",
+          "minLength": 1
+        },
+        "repoUpdatedAt": {
+          "type": "string",
+          "minLength": 1
+        },
+        "latestSessionDate": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "aiTool": {
+      "type": "string",
+      "enum": [
+        "ChatGPT",
+        "Claude",
+        "Other"
+      ]
+    },
+    "home": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "headline",
+        "focus",
+        "primaryActionLabel"
+      ],
+      "properties": {
+        "headline": {
+          "type": "string",
+          "minLength": 1
+        },
+        "focus": {
+          "type": "string",
+          "minLength": 1
+        },
+        "primaryActionLabel": {
+          "type": "string",
+          "minLength": 1
+        },
+        "secondaryStatus": {
+          "type": "string",
+          "minLength": 1
+        },
+        "bringBack": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "activePractice": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "title",
+        "whyNow",
+        "whenToUseIt",
+        "timeBox",
+        "firstMove",
+        "steps",
+        "fallback",
+        "whatGoodLooksLike",
+        "whatToBringBack",
+        "reflectionPrompts"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "title": {
+          "type": "string",
+          "minLength": 1
+        },
+        "whyNow": {
+          "type": "string",
+          "minLength": 1
+        },
+        "whenToUseIt": {
+          "type": "string",
+          "minLength": 1
+        },
+        "timeBox": {
+          "type": "string",
+          "minLength": 1
+        },
+        "firstMove": {
+          "type": "string",
+          "minLength": 1
+        },
+        "steps": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "prompt": {
+          "$ref": "#/$defs/prompt"
+        },
+        "fallback": {
+          "type": "string",
+          "minLength": 1
+        },
+        "whatGoodLooksLike": {
+          "type": "string",
+          "minLength": 1
+        },
+        "whatToBringBack": {
+          "type": "string",
+          "minLength": 1
+        },
+        "privacyNote": {
+          "type": "string",
+          "minLength": 1
+        },
+        "reflectionPrompts": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        }
+      }
+    },
+    "aiGuide": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "activeTool",
+        "toolNote",
+        "prompts"
+      ],
+      "properties": {
+        "activeTool": {
+          "$ref": "#/$defs/aiTool"
+        },
+        "toolNote": {
+          "type": "string",
+          "minLength": 1
+        },
+        "prompts": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/guidePrompt"
+          }
+        }
+      }
+    },
+    "progress": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "adoptionLevel",
+        "milestones",
+        "nextEvidenceToLookFor"
+      ],
+      "properties": {
+        "adoptionLevel": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "current",
+            "label",
+            "explanation",
+            "nextLevel"
+          ],
+          "properties": {
+            "current": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 5
+            },
+            "label": {
+              "type": "string",
+              "minLength": 1
+            },
+            "explanation": {
+              "type": "string",
+              "minLength": 1
+            },
+            "nextLevel": {
+              "type": "string",
+              "minLength": 1
+            }
+          }
+        },
+        "milestones": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/milestone"
+          }
+        },
+        "nextEvidenceToLookFor": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        }
+      }
+    },
+    "privacy": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "shortReminder",
+        "doNotUpload",
+        "safeStartingPoint"
+      ],
+      "properties": {
+        "shortReminder": {
+          "type": "string",
+          "minLength": 1
+        },
+        "doNotUpload": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "safeStartingPoint": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "nextSession": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "focus",
+        "bring"
+      ],
+      "properties": {
+        "focus": {
+          "type": "string",
+          "minLength": 1
+        },
+        "bring": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "opener": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "prompt": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "tool",
+        "label",
+        "text"
+      ],
+      "properties": {
+        "tool": {
+          "$ref": "#/$defs/aiTool"
+        },
+        "label": {
+          "type": "string",
+          "minLength": 1
+        },
+        "text": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "guidePrompt": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "title",
+        "tool",
+        "useWhen",
+        "text",
+        "privacyLevel"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "title": {
+          "type": "string",
+          "minLength": 1
+        },
+        "tool": {
+          "$ref": "#/$defs/aiTool"
+        },
+        "useWhen": {
+          "type": "string",
+          "minLength": 1
+        },
+        "text": {
+          "type": "string",
+          "minLength": 1
+        },
+        "privacyLevel": {
+          "type": "string",
+          "enum": [
+            "safe",
+            "redact-first",
+            "approval-needed"
+          ]
+        }
+      }
+    },
+    "homeworkItem": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "title",
+        "owner",
+        "status",
+        "nextStep"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "title": {
+          "type": "string",
+          "minLength": 1
+        },
+        "owner": {
+          "type": "string",
+          "enum": [
+            "client",
+            "coach",
+            "external"
+          ]
+        },
+        "status": {
+          "type": "string",
+          "enum": [
+            "active",
+            "waiting",
+            "blocked",
+            "parked",
+            "complete"
+          ]
+        },
+        "timing": {
+          "type": "string",
+          "minLength": 1
+        },
+        "nextStep": {
+          "type": "string",
+          "minLength": 1
+        },
+        "source": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "milestone": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "date",
+        "title",
+        "note"
+      ],
+      "properties": {
+        "date": {
+          "type": "string",
+          "minLength": 1
+        },
+        "title": {
+          "type": "string",
+          "minLength": 1
+        },
+        "note": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "workstream": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "title",
+        "status",
+        "plainLanguageGoal",
+        "nextSmallestAction"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "title": {
+          "type": "string",
+          "minLength": 1
+        },
+        "status": {
+          "type": "string",
+          "enum": [
+            "active",
+            "parked",
+            "blocked",
+            "complete"
+          ]
+        },
+        "plainLanguageGoal": {
+          "type": "string",
+          "minLength": 1
+        },
+        "nextSmallestAction": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "toolStatus": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "tool",
+        "status",
+        "clientNote"
+      ],
+      "properties": {
+        "tool": {
+          "type": "string",
+          "minLength": 1
+        },
+        "status": {
+          "type": "string",
+          "enum": [
+            "active",
+            "blocked",
+            "parked",
+            "fallback",
+            "unknown"
+          ]
+        },
+        "clientNote": {
+          "type": "string",
+          "minLength": 1
+        },
+        "nextDecision": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    }
+  }
+}
