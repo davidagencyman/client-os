@@ -1,7 +1,7 @@
 ---
 purpose: update-persistent-client-facing-app-profile
-version: 6.0
-trigger: Run after every successful new-source processing run and whenever David explicitly asks for App Export.
+version: 6.1
+trigger: Run automatically after every successful source-processing batch and whenever David explicitly asks for App Export.
 ---
 
 # App Export
@@ -22,10 +22,11 @@ versions. Do not create a new date-stamped export file for every run.
 5. status/actions.md
 6. status/decisions.md
 7. privacy.md
-8. the newest detailed session
-9. active workstreams, practice, outcomes, and tools only when those
+8. status/source-registry.json when connected-source processing is enabled
+9. every newly created detailed session in the completed batch
+10. active workstreams, practice, outcomes, and tools only when those
    capabilities are enabled
-10. schemas/app-profile-export-v1.schema.json
+11. schemas/app-profile-export-v1.schema.json
 
 Never summarize raw transcript material directly into the App Export. Use the
 durable session and current-state records.
@@ -49,10 +50,11 @@ durable session and current-state records.
 
 ## Process behavior
 
-After a new source:
+After a new source or catch-up batch:
 
 1. Load the previous profile.
-2. Compare it with the newly updated internal state.
+2. Compare it with the final newly updated internal state and every accepted
+   session in the batch.
 3. Apply the smallest evidence-supported changes.
 4. Validate the complete object.
 5. Write the complete object to app/profile.json.

@@ -1,18 +1,34 @@
 ---
-purpose: preserve-detailed-session-memory-from-new-source
-version: 6.0
-trigger: Run for a directly attached transcript, meeting note, email, document, screenshot notes, or other substantive source.
+purpose: discover-and-preserve-detailed-session-memory-from-new-sources
+version: 6.1
+trigger: Run when David says “transcript and process”, “process transcripts”, “process the new transcripts”, or provides a directly attached substantive source.
 ---
 
 # Process Session
 
-Turn new source material into one detailed, AI-optimized session record and
-the smallest necessary current-state updates. The raw source is evidence, not
+Turn source material into detailed, AI-optimized session records and the
+smallest necessary current-state updates. When a connected source is enabled,
+this skill starts by discovering the client’s unprocessed sources; it does not
+wait for David to attach each file manually. The raw source is evidence, not
 the repository deliverable.
 
-## Before extracting
+## Non-negotiable meaning of the command
 
-Read:
+“Transcript and process” means **catch up the repository**:
+
+- find the configured source root through the connected source connector;
+- discover all candidate meeting/source files;
+- verify that each candidate belongs to this client;
+- compare stable source IDs and revisions with the source registry;
+- process every eligible unprocessed source, oldest first;
+- persist progress and finish with App Export.
+
+If the latest processed session is on the 18th and eligible sources exist on
+the 21st, 21st, and 22nd, process all three. “Latest” is not a one-file limit.
+
+## Step 0 — Read the operating state
+
+Read, in this order:
 
 1. context/client.md
 2. context/engagement.md
@@ -21,17 +37,64 @@ Read:
 5. status/decisions.md
 6. privacy.md
 7. capabilities.md
-8. the newest relevant session and workstream files
+8. status/source-registry.json
+9. the newest relevant session and workstream files
 
-For connected sources, verify the canonical client identity before processing.
-If identity is ambiguous, stop processing that source and record the
-uncertainty.
+If the registry does not exist but sessions already do, derive an initial
+registry from their frontmatter before scanning and then persist it.
 
-## Create the detailed session record
+## Step 1 — Discover candidates in the configured source
 
-Create sessions/YYYY-MM-DD-topic.md using templates/session-template.md.
-The record is the compressed replacement for the raw transcript, so preserve
-all detail that will change future consulting work:
+Use the connected Google Drive plugin when the repository’s source
+configuration names Google Drive. Read metadata before content.
+
+1. Read the private source configuration in this repository. It must name the
+   canonical root folder, folder ID/URL, folder structure, scan depth, supported
+   file types, identity keys, and date rule.
+2. List the configured root folder. For a Google Meet source, list its direct
+   dated meeting subfolders, then list each subfolder’s files.
+3. Consider native Google Docs and configured text/markdown sources. Do not use
+   an unrelated global “Transcripts” folder unless the client configuration
+   explicitly says it is the source of truth.
+4. Use the meeting timestamp in the source title/metadata as the session date;
+   use modified time only for revision/deduplication.
+5. If Drive is unavailable, stop the scan, report the connector boundary, and
+   do not claim that transcripts were processed.
+
+## Step 2 — Verify client identity before processing
+
+Titles and folder names are candidate signals, not proof. Fetch the readable
+document text and verify the participant block or body against the canonical
+client identity and aliases in context/client.md.
+
+- Accept only when the source clearly belongs to this client.
+- Mark ambiguous sources `needs-review` and do not process them.
+- Skip sources belonging to another client without copying their names,
+  content, or details into this repository.
+- Never let a shared meeting title override a body-level identity mismatch.
+
+Record the identity decision and stable provider source ID in the source
+registry, with the minimum detail needed to prevent repeated ambiguity.
+
+## Step 3 — Select the unprocessed set
+
+The source registry is authoritative. A candidate is eligible when its stable
+source ID has no processed record, or when its provider modified time/revision
+fingerprint is newer than the processed record. The latest processed date is a
+cursor and optimization, not a filter: late-arriving sources must still be
+processed.
+
+After identity filtering, sort eligible sources by meeting date/time ascending
+and process all of them in one invocation. Do not stop after the newest file.
+
+## Step 4 — Create the detailed session record for each accepted source
+
+Create `sessions/YYYY-MM-DD-topic.md` using the session template. Include the
+stable source ID, source URL when private storage permits it, provider modified
+time/revision, and the identity classification in frontmatter. Do not store the
+raw transcript.
+
+The record must preserve all detail that will change future consulting work:
 
 - what actually happened and in what sequence
 - the client's concrete work, pain, and goals
@@ -49,7 +112,7 @@ Compress repetition, filler, and transcript mechanics. Do not compress away
 meaning, a failed attempt, a client reaction, or a condition attached to a
 decision.
 
-## Update the operating state
+## Step 5 — Update the operating state and registry
 
 Update only files supported by the source:
 
@@ -60,27 +123,34 @@ Update only files supported by the source:
 - context/engagement.md for confirmed scope or working agreements
 - workstreams/ only when a durable thread has an outcome, owner, and next step
 
-Do not copy the entire session into those files. Link back to the session.
-Do not automatically update internal AOTW playbooks or consultant retrospectives
-from a client source.
+After each candidate result, update status/source-registry.json with the source
+ID, source fingerprint, session date, identity status, processing status,
+session path, and any failure or review note. This makes the next command
+resumable and fast.
 
-## Required next step
+## Step 6 — Run App Export automatically
 
-When the source was accepted and durable updates completed, run
-app-export.md. App Export must read the previous app/profile.json before
-creating the next client-facing profile.
+When one or more sources were accepted and the batch’s durable updates are
+complete, run app-export.md automatically in the same request. App Export must
+read the previous app/profile.json before creating the next client-facing
+profile. If there were no eligible sources, leave the existing profile
+unchanged.
 
-## Completion report
+## Step 7 — Completion report
 
 Report:
 
-- source and classification
-- session file created
+- the source root scanned and candidate count
+- accepted, processed, skipped, ambiguous, and failed counts
+- session files created
 - current-state files updated
+- source-registry entries updated
 - actions and decisions found
 - workstreams created or changed
-- important uncertainty
 - App Export result
 - capabilities deliberately skipped
+
+If the connector was unavailable or a source could not be identity-verified,
+say that explicitly. Never report a clean completion for an unverified scan.
 
 Never store passwords, API keys, tokens, recovery codes, or raw source files.

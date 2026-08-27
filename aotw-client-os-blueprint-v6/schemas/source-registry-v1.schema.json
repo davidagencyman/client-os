@@ -1,0 +1,135 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Client Source Processing Registry v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "clientId",
+    "source",
+    "lastScanAt",
+    "lastProcessedSessionDate",
+    "items"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": "client-source-registry/v1"
+    },
+    "clientId": {
+      "type": "string",
+      "minLength": 1
+    },
+    "source": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "system",
+        "rootFolderName",
+        "rootFolderId",
+        "rootFolderUrl",
+        "structure",
+        "scanDepth",
+        "candidateTypes",
+        "identityRule",
+        "dateRule"
+      ],
+      "properties": {
+        "system": {
+          "type": "string",
+          "enum": ["google-drive", "other"]
+        },
+        "rootFolderName": {
+          "type": "string",
+          "minLength": 1
+        },
+        "rootFolderId": {
+          "type": "string",
+          "minLength": 1
+        },
+        "rootFolderUrl": {
+          "type": "string",
+          "minLength": 1
+        },
+        "structure": {
+          "type": "string",
+          "minLength": 1
+        },
+        "scanDepth": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 10
+        },
+        "candidateTypes": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "identityRule": {
+          "type": "string",
+          "minLength": 1
+        },
+        "dateRule": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "lastScanAt": {
+      "type": "string",
+      "minLength": 1
+    },
+    "lastProcessedSessionDate": {
+      "type": ["string", "null"]
+    },
+    "lastScanSummary": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "candidates": {"type": "integer", "minimum": 0},
+        "accepted": {"type": "integer", "minimum": 0},
+        "processed": {"type": "integer", "minimum": 0},
+        "skipped": {"type": "integer", "minimum": 0},
+        "needsReview": {"type": "integer", "minimum": 0},
+        "failed": {"type": "integer", "minimum": 0}
+      }
+    },
+    "items": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "sourceId",
+          "sourceModifiedTime",
+          "sessionDate",
+          "identityStatus",
+          "processingStatus",
+          "checkedAt"
+        ],
+        "properties": {
+          "sourceId": {"type": "string", "minLength": 1},
+          "sourceTitle": {"type": "string", "minLength": 1},
+          "sourceUrl": {"type": "string", "minLength": 1},
+          "sourceModifiedTime": {"type": "string", "minLength": 1},
+          "sourceFingerprint": {"type": "string", "minLength": 1},
+          "sessionDate": {"type": "string", "minLength": 1},
+          "identityStatus": {
+            "type": "string",
+            "enum": ["accepted", "rejected", "needs-review"]
+          },
+          "processingStatus": {
+            "type": "string",
+            "enum": ["pending", "processed", "skipped", "failed"]
+          },
+          "checkedAt": {"type": "string", "minLength": 1},
+          "processedAt": {"type": "string", "minLength": 1},
+          "sessionPath": {"type": "string", "minLength": 1},
+          "note": {"type": "string", "minLength": 1}
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,26 @@
+{
+  "schemaVersion": "client-source-registry/v1",
+  "clientId": "REPLACE_WITH_CLIENT_ID",
+  "source": {
+    "system": "google-drive",
+    "rootFolderName": "REPLACE_WITH_ROOT_FOLDER_NAME",
+    "rootFolderId": "REPLACE_WITH_PRIVATE_FOLDER_ID",
+    "rootFolderUrl": "REPLACE_WITH_PRIVATE_FOLDER_URL",
+    "structure": "REPLACE_WITH_FOLDER_STRUCTURE",
+    "scanDepth": 2,
+    "candidateTypes": ["application/vnd.google-apps.document", "text/plain", "text/markdown"],
+    "identityRule": "Verify the client from document body or participant data; title alone is insufficient.",
+    "dateRule": "Use the meeting date/time in the source title or provider metadata; use modified time only for revision detection."
+  },
+  "lastScanAt": "REPLACE_WITH_TIMESTAMP",
+  "lastProcessedSessionDate": null,
+  "lastScanSummary": {
+    "candidates": 0,
+    "accepted": 0,
+    "processed": 0,
+    "skipped": 0,
+    "needsReview": 0,
+    "failed": 0
+  },
+  "items": []
+}

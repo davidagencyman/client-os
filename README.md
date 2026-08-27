@@ -13,9 +13,10 @@ AI-readable operating repositories for Ahead of the Wave client engagements.
 
 Use aotw-client-os-blueprint-v6/ for all new client repositories.
 
-v6 is built around detailed, AI-optimized session records as the durable
-replacement for retained raw transcripts. It also provides persistent,
-update-aware App Export and conversational session supervision.
+v6.1 is built around detailed, AI-optimized session records as the durable
+replacement for retained raw transcripts. It also provides deterministic
+connected-source catch-up, persistent update-aware App Export, and
+conversational session supervision.
 
 Start with:
 

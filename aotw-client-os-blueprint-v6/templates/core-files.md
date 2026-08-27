@@ -1,6 +1,6 @@
 ---
 purpose: client-os-v6-core-file-templates
-version: 6.0
+version: 6.1
 updated: 2026-08-27
 ---
 
@@ -126,6 +126,14 @@ updated: YYYY-MM-DD
 - Conditions:
 - Source:
 ~~~
+
+## status/source-registry.json
+
+Use this machine-readable file whenever a connected source is enabled. Copy
+templates/source-registry.json, replace the placeholders with the private
+client source configuration, and update one item per provider source. Keep the
+stable source ID and revision/fingerprint so “transcript and process” can
+resume without duplicating sessions.
 
 ## privacy.md
 

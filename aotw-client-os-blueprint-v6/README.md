@@ -1,19 +1,20 @@
 ---
-title: AOTW Client OS Blueprint v6
+title: AOTW Client OS Blueprint v6.1
 purpose: reusable-build-instruction
-version: 6.0
+version: 6.1
 updated: 2026-08-27
 ---
 
-# AOTW Client OS Blueprint v6
+# AOTW Client OS Blueprint v6.1
 
 This is the default blueprint for new Ahead of the Wave client operating
 repositories.
 
-v6 is built around one practical fact: the raw transcript is not retained.
-The detailed, AI-optimized session record is therefore the durable memory of
-the engagement. Current status, actions, decisions, and the client-facing App
-Export are projections of that memory.
+v6.1 is built around two practical facts: the raw transcript is not retained,
+and a connected source must be discoverable without asking David to attach each
+file manually. The detailed, AI-optimized session record is therefore the
+durable memory of the engagement. Current status, actions, decisions, and the
+client-facing App Export are projections of that memory.
 
 ## What changed from v5
 
@@ -28,6 +29,9 @@ Export are projections of that memory.
   client repository.
 - Privacy routes information to the correct lane instead of removing useful
   internal session evidence.
+- “Transcript and process” is a catch-up command: discover the configured
+  Google Drive source, identity-check candidates, process every unprocessed
+  source in chronological order, and update the persistent source registry.
 
 ## Package contents
 
@@ -36,6 +40,8 @@ Export are projections of that memory.
 - templates/ — initial repository and detailed-session templates.
 - schemas/app-profile-export-v1.schema.json — the existing App Export import
   contract, kept stable for compatibility.
+- schemas/source-registry-v1.schema.json — the source identity and processing
+  ledger used by connected-source catch-up.
 
 ## Default rule
 

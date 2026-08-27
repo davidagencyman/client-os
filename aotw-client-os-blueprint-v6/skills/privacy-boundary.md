@@ -1,6 +1,6 @@
 ---
 purpose: route-important-information-between-private-and-client-facing-lanes
-version: 6.0
+version: 6.1
 trigger: Run before App Export, external uploads, public examples, sensitive sharing, or any uncertain data-handling decision.
 ---
 
@@ -48,6 +48,16 @@ Before sharing or exporting:
 6. Are third-party details necessary and permitted?
 7. Are proposals clearly marked as proposals?
 8. Is client-facing language understandable and useful?
+
+For connected-source processing, also verify:
+
+9. Was the source found under the configured client root?
+10. Was identity verified from the source body or participant data rather than
+    title alone?
+11. Are source IDs and private Drive URLs kept only in the private client
+    repository, never in the public blueprint or AOTW-wide knowledge?
+12. Were ambiguous or other-client sources skipped without copying their
+    content into this client lane?
 
 Record a boundary or uncertainty when the answer is unclear. Do not silently
 discard important evidence.

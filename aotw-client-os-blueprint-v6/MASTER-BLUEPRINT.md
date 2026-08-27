@@ -2,18 +2,21 @@
 title: AOTW Client OS Master Blueprint
 purpose: reusable-build-instruction
 audience: Ahead of the Wave team and AI coding agents
-version: 6.0
+version: 6.1
 updated: 2026-08-27
 ---
 
-# AOTW Client OS Master Blueprint v6
+# AOTW Client OS Master Blueprint v6.1
 
 ## Objective
 
 Build a private, AI-readable operating repository for one AOTW client
 engagement. The repository must help David remember the client, prepare
 thoughtfully, keep promises, preserve important session evidence, and maintain
-the client-facing App Export without retaining raw transcripts.
+the client-facing App Export without retaining raw transcripts. When a source
+connector is configured, David must be able to say “transcript and process”
+and have the agent discover and process the unprocessed sources without a
+manual attachment step.
 
 This is not a normal codebase, a transcript dump, a generic skill library, or
 the AOTW internal playbook. It is the durable client-specific memory and
@@ -37,6 +40,10 @@ operating surface.
    uncertainty.
 10. Fewer, more useful updates are better than a cascade that touches every
     file after every session.
+11. Source discovery and identity checks are explicit; a meeting title alone
+    is never proof that a source belongs to this client.
+12. A process command catches up all eligible unprocessed sources, not only the
+    newest one.
 
 ## Data lanes
 
@@ -82,6 +89,7 @@ status/
   current.md
   actions.md
   decisions.md
+  source-registry.json        # required when a connected source is enabled
 privacy.md
 capabilities.md
 _skills/
@@ -104,8 +112,10 @@ learning/
 ~~~
 
 Do not create empty directories, .gitkeep files, or a required _inbox folder.
-Source material should be attached directly to the AI agent or fetched through
-an explicitly configured source-sync capability.
+When a connected source is enabled, source material is discovered through the
+explicit source configuration and tracked in status/source-registry.json.
+When no connected source is enabled, a directly attached source remains a
+supported fallback.
 
 ## Required file roles
 
@@ -173,6 +183,79 @@ Each capability entry must state:
 - what it writes
 - whether it is client-facing, internal, or conditional
 
+## Connected-source discovery and catch-up
+
+“Transcript and process”, “process transcripts”, and equivalent requests mean
+run the connected-source catch-up routine. They do not mean “wait for David to
+attach a file.” The client repository must record the source configuration in
+the private repository, either in the processing skill or a referenced context
+file, and must maintain status/source-registry.json.
+
+### Required source configuration
+
+For every connected client source, record:
+
+- provider and connector name
+- canonical root folder ID and URL
+- folder structure and maximum scan depth
+- supported MIME types or file extensions
+- the client identity keys and evidence required for acceptance
+- the timestamp/date field used as the meeting date
+- fallback behavior when the connector is unavailable
+
+Never put a private client’s source URL or folder ID into this public
+blueprint. Put the concrete values in the private client repository.
+
+### Google Drive procedure
+
+Use the connected Google Drive plugin as the source of truth:
+
+1. Read the client identity, source configuration, source registry, current
+   state, and recent session frontmatter.
+2. List the configured root folder. For a Google Meet root, list its dated
+   meeting subfolders and then list the files inside each candidate folder.
+3. Read metadata before fetching content. Consider native Google Docs and
+   supported text/markdown sources; do not download or store raw source files.
+4. Treat names, titles, and folder labels as candidate signals only. Fetch the
+   readable document text and verify the participant/client identity from the
+   body or participant block. A same-looking meeting title is not enough.
+5. If identity is clear, classify the source as accepted. If identity is
+   ambiguous, record needs-review and do not process it. If it belongs to a
+   different client, skip it without copying that client’s details into this
+   repository.
+
+### Selecting unprocessed sources
+
+The source registry is the deduplication authority. A source is unprocessed if
+its stable provider file ID is not recorded as processed, or if the provider’s
+modified time/revision fingerprint changed after processing. The latest
+processed date is an optimization and a human-readable cursor; it is not a
+reason to discard an older source that arrived late.
+
+After identity checks, sort accepted sources by meeting date and time and
+process every eligible unprocessed source in ascending order. For example, if
+the latest processed session is on the 18th and eligible sources exist on the
+21st, 21st, and 22nd, process all three in that order. Do not process only the
+single newest source.
+
+### Resume and completion behavior
+
+After each accepted source, persist its source ID, source fingerprint, meeting
+date, session path, and processing result in the registry. If one source fails,
+continue with independent sources, mark the failure, and report it. A later
+run retries only pending or failed sources whose identity and fingerprint still
+require work.
+
+When the batch has at least one accepted source, run App Export automatically
+as the final step of the same request, after all durable session and state
+updates. If no eligible source exists, report a clean no-op and do not create
+profile churn.
+
+The completion report must include: root scanned, candidate count, accepted
+count, processed count, skipped/ambiguous count, failed count, session files
+created, state files changed, App Export result, and the source IDs or paths
+that still need attention. Never claim a scan when Drive was unavailable.
+
 ## Detailed session record
 
 Create one file for each substantive call or source:
@@ -222,17 +305,21 @@ transcript or create a second full history in status files.
 
 ## Processing lifecycle
 
-When a new source is accepted:
+When a new source is accepted, either from connected-source catch-up or a
+direct attachment:
 
-1. Read the client identity, engagement, current status, actions, decisions,
-   privacy rules, and recent sessions.
-2. Create one detailed session record.
-3. Update only the current-state files supported by the source.
-4. Create or update a workstream only when the topic spans sessions and has a
+1. Complete the source-discovery and identity steps above when the request is
+   a catch-up command.
+2. Read the client identity, engagement, current status, actions, decisions,
+   privacy rules, source registry, and recent sessions.
+3. Create one detailed session record per accepted source.
+4. Update only the current-state files supported by the source.
+5. Create or update a workstream only when the topic spans sessions and has a
    clear outcome, owner, and next step.
-5. Run App Export after durable processing is complete.
-6. Validate the App Export JSON and the session metadata.
-7. Report what was captured, what changed, what was skipped, and what remains
+6. Update the source registry after each result.
+7. Run App Export after durable batch processing is complete.
+8. Validate the App Export JSON and the session metadata.
+9. Report what was captured, what changed, what was skipped, and what remains
    uncertain.
 
 The process command must never claim that a source was checked when the
@@ -252,8 +339,9 @@ valid according to schemas/app-profile-export-v1.schema.json.
 When exporting:
 
 1. Read the existing app/profile.json first.
-2. Read current status, actions, practice, outcomes, tools, privacy, the newest
-   session, and active workstreams as applicable.
+2. Read current status, actions, practice, outcomes, tools, privacy, the source
+   registry, the newest sessions in the completed batch, and active workstreams
+   as applicable.
 3. Preserve stable IDs and existing client-facing content unless evidence
    changes it.
 4. Update only fields supported by the latest durable evidence.
@@ -332,6 +420,10 @@ Before declaring a new repository or processing run complete, verify:
 - actions and decisions have owners/sources where applicable
 - App Export reads and updates the previous profile
 - App Export validates against the import schema
+- connected-source runs read and update the source registry
+- all eligible sources newer than the processing cursor are either processed,
+  explicitly skipped for identity/privacy reasons, or recorded as needing
+  review
 - the App Export JSON contains no internal-only detail
 - no empty placeholder directories were created
 - only enabled capabilities are present
@@ -343,11 +435,14 @@ Before declaring a new repository or processing run complete, verify:
 1. Create a private repository with the client slug.
 2. Add the initial files from this blueprint and the core skills.
 3. Add verified discovery context only; preserve unknowns.
-4. Enable App Export and create the initial valid profile when the app is part
+4. Configure the canonical connected source when one is available and create
+   status/source-registry.json.
+5. Enable App Export and create the initial valid profile when the app is part
    of the engagement.
-5. Process the first substantive source through the detailed session workflow.
-6. Run the quality gate.
-7. Record the blueprint version in README.md.
+6. Run the first catch-up scan; process every eligible backlog source, not just
+   the newest one.
+7. Run the quality gate.
+8. Record the blueprint version in README.md.
 
 Do not migrate older client repositories automatically. Use this blueprint as
 the new default, then create a deliberate migration map that preserves their
