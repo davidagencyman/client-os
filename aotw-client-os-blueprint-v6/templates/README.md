@@ -25,8 +25,9 @@ transcripts are not required to remain here.
 
 Preserve important evidence in detailed sessions. Keep current status short.
 Add capabilities and folders only when the work requires them. After a
-successful source-processing batch, update App Export and show the complete
-JSON in chat. “Transcript and process” means discover and process every
-eligible unprocessed source in the configured Drive root.
+successful source-processing batch, update App Export, stage the final profile
+in the matching EAIC account, and—after action-time confirmation—publish it and
+verify the live state. Show the complete JSON in chat. “Process” means discover
+and process every eligible unprocessed source in the configured Drive root.
 
 Blueprint version: 6.1
