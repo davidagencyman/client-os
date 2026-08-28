@@ -36,6 +36,18 @@ unagreed proposals, and operational details the client does not need.
 Do not move client-identifying details, private language, raw source material,
 or relationship intelligence into generalized methods or reusable service IP.
 
+## Live EAIC profile publication
+
+- Publish only the validated, client-safe `app/profile.json`; never upload raw
+  transcripts or the private repository as a substitute.
+- Resolve the exact visible client account in the EAIC admin panel and re-check
+  its name and email before loading the profile.
+- Leave login email, passwords, access controls, danger-zone controls, and
+  library materials unchanged.
+- Ask for confirmation immediately before `Save changes`, even when
+  `Process` was requested. If publication cannot be verified, report it as
+  pending rather than claiming the client profile changed.
+
 ## Checklist
 
 Before sharing or exporting:
@@ -58,6 +70,13 @@ For connected-source processing, also verify:
     repository, never in the public blueprint or AOTW-wide knowledge?
 12. Were ambiguous or other-client sources skipped without copying their
     content into this client lane?
+
+Before EAIC publication, also verify:
+
+13. Is the payload exactly the validated `app/profile.json`?
+14. Is the visible EAIC account an exact name/email match?
+15. Has David confirmed the write immediately before `Save changes`?
+16. Was the post-save generated/profile-updated state verified?
 
 Record a boundary or uncertainty when the answer is unclear. Do not silently
 discard important evidence.
