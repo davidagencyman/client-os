@@ -1,7 +1,7 @@
 ---
 purpose: default-entry-and-minimum-useful-routing
 version: 6.1
-trigger: Start here for any unclear request, “transcript and process”, source processing, session preparation, follow-up, App Export, or repository update.
+trigger: Start here for any unclear request, “Process”, “transcript and process”, source processing, session preparation, follow-up, App Export, or repository update.
 ---
 
 # Operating Router
@@ -28,7 +28,7 @@ request. Do not treat the repository slug as proof of client identity.
 
 | Situation | Run |
 |---|---|
-| “Transcript and process” / process transcripts | process-session in connected-source catch-up mode; then App Export automatically |
+| “Process” / “Transcript and process” / process transcripts | process-session in connected-source catch-up mode; then App Export and live EAIC publication automatically after confirmation |
 | Directly attached new transcript, notes, email, or source | process-session, then App Export |
 | Prepare for a session | session-supervisor |
 | Draft a recap or follow-up | follow-up |
@@ -39,8 +39,9 @@ request. Do not treat the repository slug as proof of client identity.
 
 ## Routing rules
 
-- “Transcript and process” is a command to search the configured source root;
-  do not ask David to attach each transcript when the connector is available.
+- “Process” and its explanatory variants are commands to search the configured
+  source root; do not ask David to attach each transcript when the connector is
+  available.
 - Discover all eligible unprocessed sources, not only the newest source.
 - Use stable source IDs and revision fingerprints to deduplicate; do not rely on
   filenames or dates alone.
@@ -51,9 +52,10 @@ request. Do not treat the repository slug as proof of client identity.
 - Do not create a workstream unless it has an outcome, owner, and next step.
 - Keep important source-derived detail in the session record.
 - After a successful new-source processing run, App Export is part of the
-  completed chain.
+  completed chain and includes live EAIC publication after confirmation.
 - After a catch-up batch, run App Export once from the final durable state in
-  the same request.
+  the same request, then report whether the live publication succeeded or is
+  pending.
 - If a connector fails or identity cannot be verified, report that boundary
   instead of claiming the source was checked.
 
