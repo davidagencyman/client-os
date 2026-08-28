@@ -139,9 +139,9 @@ resumable and fast.
 When one or more sources were accepted and the batch’s durable updates are
 complete, run app-export.md automatically in the same request. App Export must
 read the previous app/profile.json before creating the next client-facing
-profile, then stage the final validated file in the exact EAIC client account
-through Brave and ask for action-time confirmation immediately before
-`Save changes`. If there were no eligible sources, leave the existing profile
+profile, then write and validate the final file. Do not stage or save the live
+profile in this step; continue with Step 7 for App Export's single publication
+sequence after the repository update is complete. If there were no eligible sources, leave the existing profile
 unchanged and do not publish.
 
 ## Step 7 — Publish the live EAIC profile
