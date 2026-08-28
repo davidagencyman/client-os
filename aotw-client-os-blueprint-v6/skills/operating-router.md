@@ -56,6 +56,8 @@ request. Do not treat the repository slug as proof of client identity.
 - After a catch-up batch, run App Export once from the final durable state in
   the same request, then report whether the live publication succeeded or is
   pending.
+- If a catch-up batch is a clean no-op, leave App Export and the live profile
+  unchanged; do not publish.
 - If a connector fails or identity cannot be verified, report that boundary
   instead of claiming the source was checked.
 
