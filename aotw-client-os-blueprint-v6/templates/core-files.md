@@ -155,7 +155,8 @@ third-party material.
 
 Only client-safe material belongs in app/profile.json. Exclude internal
 coaching observations, raw source material, sensitive third-party details, and
-unagreed internal analysis.
+unagreed internal analysis. When the EAIC app is enabled, publish only this
+validated file to the exact client account after action-time confirmation.
 
 ## External tools
 
@@ -180,7 +181,7 @@ updated: YYYY-MM-DD
 |---|---|---|---|---|
 | Operating Router | Any unclear request | README, status, context | Routing decision | enabled |
 | Process Session | New source material | Current context and recent sessions | Detailed session and necessary state | enabled |
-| App Export | After successful processing or explicit export request | Internal state and prior profile | app/profile.json and chat JSON | enabled |
+| App Export | After successful processing or explicit export request | Internal state, prior profile, privacy boundary, and Brave EAIC admin | app/profile.json, chat JSON, and the live EAIC profile after confirmation | enabled |
 | Session Supervisor | Preparing for a session | Current state and recent sessions | Conversation, optional focus note | enabled |
 | Follow-up | After a session or explicit request | Session and actions | Draft message | enabled |
 | Privacy Boundary | Before sharing or uploading | Data-boundary rules | Boundary decision | enabled |
