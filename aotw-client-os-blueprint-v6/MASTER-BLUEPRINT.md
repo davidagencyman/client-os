@@ -13,10 +13,12 @@ updated: 2026-08-27
 Build a private, AI-readable operating repository for one AOTW client
 engagement. The repository must help David remember the client, prepare
 thoughtfully, keep promises, preserve important session evidence, and maintain
-the client-facing App Export without retaining raw transcripts. When a source
-connector is configured, David must be able to say “transcript and process”
-and have the agent discover and process the unprocessed sources without a
-manual attachment step.
+the client-facing App Export without retaining raw transcripts. When the EAIC
+app is in scope, the validated export must also be publishable to the matching
+live client profile through the existing Brave workflow after confirmation. When a source
+connector is configured, David must be able to say “Process” and have the
+agent discover and process the unprocessed sources without a manual attachment
+step. “Transcript and process” remains an explanatory variant.
 
 This is not a normal codebase, a transcript dump, a generic skill library, or
 the AOTW internal playbook. It is the durable client-specific memory and
@@ -66,7 +68,9 @@ internal coaching observations, private third-party details, raw transcripts,
 or unagreed internal commercial analysis.
 
 The current file is the baseline for the next export. Git history provides
-previous versions; do not create a new random export filename on every run.
+previous versions; do not create a new random export filename on every run. When
+EAIC publication is enabled, this exact validated file is the only payload to
+stage in the matching live client profile.
 
 ### AOTW internal knowledge
 
@@ -185,8 +189,8 @@ Each capability entry must state:
 
 ## Connected-source discovery and catch-up
 
-“Transcript and process”, “process transcripts”, and equivalent requests mean
-run the connected-source catch-up routine. They do not mean “wait for David to
+“Process”, “transcript and process”, “process transcripts”, and equivalent
+requests mean run the connected-source catch-up routine. They do not mean “wait for David to
 attach a file.” The client repository must record the source configuration in
 the private repository, either in the processing skill or a referenced context
 file, and must maintain status/source-registry.json.
@@ -252,14 +256,17 @@ run retries only pending or failed sources whose identity and fingerprint still
 require work.
 
 When the batch has at least one accepted source, run App Export automatically
-as the final step of the same request, after all durable session and state
-updates. If no eligible source exists, report a clean no-op and do not create
-profile churn.
+as the final repository step of the same request, after all durable session and
+state updates. Then run App Export's live EAIC publication section: resolve the
+exact account in Brave, stage the final validated JSON, ask for action-time
+confirmation immediately before `Save changes`, and verify the post-save state.
+If no eligible source exists, report a clean no-op, leave the existing profile
+unchanged, and do not publish.
 
 The completion report must include: root scanned, candidate count, accepted
 count, processed count, skipped/ambiguous count, failed count, session files
-created, state files changed, App Export result, and the source IDs or paths
-that still need attention. Never claim a scan when Drive was unavailable.
+created, state files changed, App Export result, EAIC publication state, and the
+source IDs or paths that still need attention. Never claim a scan when Drive was unavailable.
 
 ## Detailed session record
 
@@ -323,9 +330,11 @@ direct attachment:
    clear outcome, owner, and next step.
 6. Update the source registry after each result.
 7. Run App Export after durable batch processing is complete.
-8. Validate the App Export JSON and the session metadata.
-9. Report what was captured, what changed, what was skipped, and what remains
-   uncertain.
+8. Stage and, after David's action-time confirmation, publish the final App
+   Export to the exact EAIC client account through Brave; verify the live state.
+9. Validate the App Export JSON and the session metadata.
+10. Report what was captured, what changed, what was skipped, what was published,
+    and what remains uncertain.
 
 The process command must never claim that a source was checked when the
 connector was unavailable or identity could not be verified.
@@ -355,6 +364,11 @@ When exporting:
 7. Validate the complete JSON against the schema.
 8. Write the same complete JSON to app/profile.json and show that exact JSON in
    chat for drag-and-drop import.
+9. When at least one source was accepted and EAIC publication is enabled, run
+   the existing App Export publication procedure in Brave. Match the exact
+   client account, touch only the Profile section, require confirmation
+   immediately before `Save changes`, and verify the saved state. Do not alter
+   access, passwords, danger-zone controls, or materials.
 
 The export is an update to a living client profile, not a new profile created
 from zero. If processing finds no new accepted source, avoid unnecessary
@@ -430,6 +444,9 @@ Before declaring a new repository or processing run complete, verify:
   explicitly skipped for identity/privacy reasons, or recorded as needing
   review
 - the App Export JSON contains no internal-only detail
+- the EAIC publication path matches the exact client account, requires final
+  confirmation before `Save changes`, and reports a pending state when it cannot
+  verify publication
 - no empty placeholder directories were created
 - only enabled capabilities are present
 - internal AOTW knowledge is not mixed into client memory
@@ -444,10 +461,12 @@ Before declaring a new repository or processing run complete, verify:
    status/source-registry.json.
 5. Enable App Export and create the initial valid profile when the app is part
    of the engagement.
-6. Run the first catch-up scan; process every eligible backlog source, not just
+6. Use the existing App Export publication procedure for the live EAIC profile;
+   do not add a second standalone sync skill, and never store credentials.
+7. Run the first catch-up scan; process every eligible backlog source, not just
    the newest one.
-7. Run the quality gate.
-8. Record the blueprint version in README.md.
+8. Run the quality gate.
+9. Record the blueprint version in README.md.
 
 Do not migrate older client repositories automatically. Use this blueprint as
 the new default, then create a deliberate migration map that preserves their
