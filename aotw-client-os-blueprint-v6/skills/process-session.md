@@ -1,7 +1,7 @@
 ---
 purpose: discover-and-preserve-detailed-session-memory-from-new-sources
 version: 6.1
-trigger: Run when David says “transcript and process”, “process transcripts”, “process the new transcripts”, or provides a directly attached substantive source.
+trigger: Run when David says “Process”, “transcript and process”, “process transcripts”, “process the new transcripts”, or provides a directly attached substantive source.
 ---
 
 # Process Session
@@ -14,7 +14,8 @@ the repository deliverable.
 
 ## Non-negotiable meaning of the command
 
-“Transcript and process” means **catch up the repository**:
+“Process” is the canonical catch-up command; “transcript and process” and
+other explanatory variants mean the same thing. It means **catch up the repository**:
 
 - find the configured source root through the connected source connector;
 - discover all candidate meeting/source files;
@@ -138,10 +139,20 @@ resumable and fast.
 When one or more sources were accepted and the batch’s durable updates are
 complete, run app-export.md automatically in the same request. App Export must
 read the previous app/profile.json before creating the next client-facing
-profile. If there were no eligible sources, leave the existing profile
-unchanged.
+profile, then stage the final validated file in the exact EAIC client account
+through Brave and ask for action-time confirmation immediately before
+`Save changes`. If there were no eligible sources, leave the existing profile
+unchanged and do not publish.
 
-## Step 7 — Completion report
+## Step 7 — Publish the live EAIC profile
+
+After App Export has written and validated `app/profile.json`, run its
+`Publish to the live EAIC profile` section. If Brave is unavailable, the
+identity match is not exact, the JSON is invalid, or David has not confirmed,
+do not save and report EAIC publication as pending. Do not change access,
+passwords, danger-zone controls, or client materials.
+
+## Step 8 — Completion report
 
 Report:
 
@@ -153,6 +164,7 @@ Report:
 - actions and decisions found
 - workstreams created or changed
 - App Export result
+- EAIC profile publication state: published, pending, or not attempted, with the reason when pending
 - capabilities deliberately skipped
 
 If the connector was unavailable or a source could not be identity-verified,
