@@ -15,8 +15,8 @@ engagement. The repository must help David remember the client, prepare
 thoughtfully, keep promises, preserve important session evidence, and maintain
 the client-facing App Export without retaining raw transcripts. When the EAIC
 app is in scope, the validated export must also be publishable to the matching
-live client profile through the existing Brave workflow after confirmation. When a source
-connector is configured, David must be able to say “Process” and have the
+live client profile through the existing Brave workflow after confirmation.
+When a source connector is configured, David must be able to say “Process” and have the
 agent discover and process the unprocessed sources without a manual attachment
 step. “Transcript and process” remains an explanatory variant.
 
@@ -329,10 +329,13 @@ direct attachment:
 5. Create or update a workstream only when the topic spans sessions and has a
    clear outcome, owner, and next step.
 6. Update the source registry after each result.
-7. Run App Export after durable batch processing is complete.
-8. Stage and, after David's action-time confirmation, publish the final App
-   Export to the exact EAIC client account through Brave; verify the live state.
-9. Validate the App Export JSON and the session metadata.
+7. Run App Export after durable batch processing is complete; it validates and
+   writes the canonical JSON.
+8. If at least one source was accepted, let App Export's existing publication
+   procedure stage and, after David's action-time confirmation, publish the
+   final profile to the exact EAIC client account through Brave; verify the live
+   state once.
+9. Validate the session metadata.
 10. Report what was captured, what changed, what was skipped, what was published,
     and what remains uncertain.
 
