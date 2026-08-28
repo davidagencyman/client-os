@@ -72,8 +72,7 @@ After a new source or catch-up batch:
 The repository's `app/profile.json` is the only payload to publish. After the
 export is written and validated, continue with this publication step in the
 same `Process` request when at least one source was accepted, or when David
-explicitly requests a live sync. This is not a
-second export and does not add a new skill.
+explicitly requests a live sync. This is not a second export and does not add a new skill.
 
 1. Run `privacy-boundary.md` and use the current file, not an earlier chat
    copy.
